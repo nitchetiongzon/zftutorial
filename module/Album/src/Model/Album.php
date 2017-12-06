@@ -15,6 +15,7 @@ class Album
     public $id;
     public $artist;
     public $title;
+    public $date;
 
     // Add this property:
     private $inputFilter;
@@ -24,6 +25,7 @@ class Album
         $this->id     = !empty($data['id']) ? $data['id'] : null;
         $this->artist = !empty($data['artist']) ? $data['artist'] : null;
         $this->title  = !empty($data['title']) ? $data['title'] : null;
+        $this->date  = !empty($data['date']) ? $data['date'] : null;
     }
 
     public function setInputFilter(InputFilterInterface $inputFilter)
@@ -88,6 +90,11 @@ class Album
             ],
         ]);
 
+        $inputFilter->add([
+            'name' => 'date',
+            'required' => true,
+        ]);
+
         $this->inputFilter = $inputFilter;
         return $this->inputFilter;
     }
@@ -98,6 +105,7 @@ class Album
             'id'     => $this->id,
             'artist' => $this->artist,
             'title'  => $this->title,
+            'date'  => $this->date,
         ];
     }
 
