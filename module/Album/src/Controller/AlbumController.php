@@ -6,6 +6,7 @@ use Zend\View\Model\ViewModel;
 use Album\Model\AlbumTable;
 use Album\Form\AlbumForm;
 use Album\Model\Album;
+use Zend\View\Model\JsonModel;
 
 class AlbumController extends AbstractActionController
 {
@@ -114,5 +115,11 @@ class AlbumController extends AbstractActionController
             'id'    => $id,
             'album' => $this->table->getAlbum($id),
         ];
+    }
+    public function removeAction() {
+        $id = $_POST['id'];
+        if($this->table->deleteAlbum($id))
+            return true;
+        else return false;
     }
 }

@@ -24,7 +24,27 @@ $this->headTitle($title);
             <td>
                 <a href="<?= $this->url('album', ['action' => 'edit', 'id' => $album->id]) ?>">Edit</a>
                 <a href="<?= $this->url('album', ['action' => 'delete', 'id' => $album->id]) ?>">Delete</a>
+                <a id="<?=$album->id?>" onclick="del(this)">Instant Delete</a>
             </td>
         </tr>
     <?php endforeach; ?>
 </table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script>
+     function del(row){
+         var id= $(row).attr('id');
+        // alert(id);
+       $.ajax({
+           url:"/album/remove",
+           type:"POST",
+           data:{
+               id:id
+           },
+           success: function(data){
+               $(row).parents("tr").remove()
+           }
+        });
+
+       }
+</script>
