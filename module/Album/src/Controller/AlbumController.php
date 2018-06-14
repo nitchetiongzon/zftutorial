@@ -23,6 +23,13 @@ class AlbumController extends AbstractActionController
             'albums' => $this->table->fetchAll(),
         ]);
     }
+	
+	public function indexAction()
+    {
+        return new ViewModel([
+            'albums' => $this->table->fetchAll(),
+        ]);
+    }
 
     public function addAction()
     {
@@ -42,7 +49,11 @@ class AlbumController extends AbstractActionController
         if (! $form->isValid()) {
             return ['form' => $form];
         }
-
+		
+		 return new ViewModel([
+            'albums' => $this->table->fetchAll(),
+        ]);
+		
         $album->exchangeArray($form->getData());
         $this->table->saveAlbum($album);
         return $this->redirect()->toRoute('album');
